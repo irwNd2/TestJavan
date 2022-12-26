@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       Child.belongsTo(models.Parent, {
         foreignKey: 'ParentId',
       });
+      Child.hasMany(models.GrandChild, {
+        foreignKey: 'ChildId',
+      });
       Child.hasMany(models.Asset, {
         foreignKey: 'ChildId',
       });

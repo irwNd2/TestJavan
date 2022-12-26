@@ -1,7 +1,32 @@
-const { Parent } = require("../models");
+const { Parent, Asset, Child, GrandChild } = require("../models");
 const axios = require("axios");
 
 class ParentController {
+  static async getParent(req, res, next) {
+    try {
+      const { parentId } = req.params;
+      const parents = await Parent.findByPk(parentId, {
+        include: [
+          {
+          model: Asset,
+        }, 
+        {
+          model: Child,
+          include: [{
+            model: GrandChild,
+            include: [Asset]
+          }, {
+            model: Asset,
+          }]
+      }]
+    });
+
+      res.status(200).json(parents);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
   static async addParent(req, res, next) {
     try {
       const { name, gender } = req.body;

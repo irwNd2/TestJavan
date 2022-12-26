@@ -14,6 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       Parent.hasMany(models.Asset, {
         foreignKey: 'ParentId',
       });
+      Parent.hasMany(models.Child, {
+        foreignKey: 'ParentId',
+      });
     }
   }
   Parent.init({
