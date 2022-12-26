@@ -23,8 +23,7 @@ class ParentController {
 
       res.status(200).json(parents);
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Internal Server Error" });
+      next(error);
     }
   }
   static async addParent(req, res, next) {
@@ -60,7 +59,7 @@ class ParentController {
 
       res.status(200).json({ name: mainData.name, assets: mainData.Assets, totalPrice: price });
     } catch (error) {
-      
+      next(error);
     }
   }
 
