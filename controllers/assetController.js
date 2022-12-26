@@ -17,8 +17,7 @@ class AssetController {
 
       res.status(200).json(assets);
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Internal Server Error" });
+     next(error);
     }
   }
 
